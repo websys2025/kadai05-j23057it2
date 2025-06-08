@@ -14,6 +14,15 @@
     <script>
         async function some_api(myForm) {
             // ここにコードを書く
+            const name = myForm.form_data.value;
+            const url = 'http://api.agify.io?name=${encodeURIComponent(name)}';
+            try{
+                const response = await fetch(url);
+                const data = await response.json():
+                document.getElementById("result").innerHTML += "推定年齢： ${data.age}<br />";
+            }catch(e){
+                document.getElementById("result").innerHTML += "エラー<br />";
+            }
             document.getElementById("result").innerHTML += myForm.form_data.value+"<br />";
             document.apiform.reset();
         }
